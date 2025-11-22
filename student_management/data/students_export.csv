@@ -1,0 +1,10 @@
+student_id,name,age,grade,email,performance,phone,course,enrollment_date
+STU001,John Smith,20,A,john.smith@university.edu,85.5,+1 (555) 123-4567,Computer Science,2024-01-15
+STU002,Emma Johnson,19,B,emma.johnson@university.edu,72.0,+1 (555) 987-6543,Mathematics,2024-02-01
+STU003,Michael Brown,21,A,michael.brown@university.edu,91.0,+1 (555) 456-7890,Physics,2024-01-20
+STU004,Sarah Davis,20,C,sarah.davis@university.edu,65.5,+1 (555) 234-5678,Biology,2024-02-10
+STU005,David Wilson,22,B,david.wilson@university.edu,78.0,+1 (555) 345-6789,Chemistry,2024-01-25
+STU006,Lisa Anderson,18,A,lisa.anderson@university.edu,94.5,+1 (555) 567-8901,Computer Science,2024-02-15
+STU007,Robert Garcia,23,D,robert.garcia@university.edu,58.0,+1 (555) 678-9012,Mathematics,2024-01-30
+STU008,Jennifer Martinez,19,B,jennifer.martinez@university.edu,81.5,+1 (555) 789-0123,Psychology,2024-02-05
+STU009,Hussain Ali,16,A,hussain987@gmail.com,75.0,+923191634446,Physics,2025-11-23
