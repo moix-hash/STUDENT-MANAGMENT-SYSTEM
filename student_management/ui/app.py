@@ -9,12 +9,12 @@ from enum import Enum
 import io
 import numpy as np
 
-# Enhanced Enum classes
+
 class PerformanceStatus(Enum):
-    EXCELLENT = "⭐ Excellent"
-    GOOD = "👍 Good" 
-    AVERAGE = "📊 Average"
-    NEEDS_IMPROVEMENT = "🚨 Needs Improvement"
+    EXCELLENT = " Excellent"
+    GOOD = " Good" 
+    AVERAGE = " Average"
+    NEEDS_IMPROVEMENT = " Needs Improvement"
 
 class Grade(Enum):
     A = "A"
@@ -24,10 +24,10 @@ class Grade(Enum):
     F = "F"
 
 class AttendanceStatus(Enum):
-    EXCELLENT = "⭐ Excellent"
-    GOOD = "👍 Good"
-    AVERAGE = "📊 Average" 
-    POOR = "🚨 Poor"
+    EXCELLENT = " Excellent"
+    GOOD = " Good"
+    AVERAGE = " Average" 
+    POOR = " Poor"
 
 class Student:
     def __init__(self, student_id, name, age, grade, email, performance, phone="", course="", department="", enrollment_date="", attendance=95.0):
@@ -77,19 +77,19 @@ class Student:
     
     def to_dict(self):
         return {
-            'student_id': student_id,
-            'name': name,
-            'age': age,
-            'grade': grade,
-            'email': email,
-            'performance': performance,
-            'phone': phone,
-            'course': course,
-            'department': department,
-            'enrollment_date': enrollment_date,
-            'attendance': attendance,
-            'last_updated': last_updated,
-            'activities': activities
+            'student_id': self.student_id,
+            'name': self.name,
+            'age': self.age,
+            'grade': self.grade,
+            'email': self.email,
+            'performance': self.performance,
+            'phone': self.phone,
+            'course': self.course,
+            'department': self.department,
+            'enrollment_date': self.enrollment_date,
+            'attendance': self.attendance,
+            'last_updated': self.last_updated,
+            'activities': self.activities
         }
 
 class StudentValidator:
@@ -103,7 +103,7 @@ class StudentValidator:
         if not data.get('email') or '@' not in data['email']:
             errors.append("Valid email address is required")
         if not data.get('performance') or data['performance'] < 0 or data['performance'] > 100:
-            errors.append("Performance must be between 0 and 100")
+            errors.append("Academic MentorDesk score must be between 0 and 100")
         if not data.get('course') or len(data['course'].strip()) < 2:
             errors.append("Course must be at least 2 characters long")
         if data.get('attendance') and (data['attendance'] < 0 or data['attendance'] > 100):
@@ -119,7 +119,7 @@ class AdvancedStudentManager:
         self.load_sample_data()
     
     def load_sample_data(self):
-        # Enhanced sample data with realistic information
+        
         sample_students = [
             Student("ST001", "Aarav Sharma", 20, Grade.A.value, "aarav.sharma@university.edu", 92.0, "+91 9876543210", 
                    "Computer Science", "Engineering", "2023-09-01", 96.5),
@@ -143,7 +143,7 @@ class AdvancedStudentManager:
                    "Mathematics", "Science", "2023-09-01", 87.9),
         ]
         
-        # Add sample activities
+        
         sample_students[0].add_activity("Assignment", "Completed Advanced Algorithms assignment")
         sample_students[1].add_activity("Project", "Submitted Data Visualization project")
         sample_students[2].add_activity("Exam", "Scored 95% in AI Midterm")
@@ -221,7 +221,7 @@ class AdvancedStudentManager:
         return results
     
     def get_statistics(self):
-        # Cache statistics for 30 seconds
+        
         current_time = time.time()
         if self.cache_stats and self.cache_time and (current_time - self.cache_time) < 30:
             return self.cache_stats
@@ -250,7 +250,7 @@ class AdvancedStudentManager:
                 course_distribution[student.course] = course_distribution.get(student.course, 0) + 1
                 department_distribution[student.department] = department_distribution.get(student.department, 0) + 1
             
-            # Performance trends
+            
             performances = [s.performance for s in self.students]
             performance_trend = "Stable"
             if len(performances) >= 2:
@@ -389,17 +389,17 @@ class ModernStudentManagementUI:
     
     def setup_page(self):
         st.set_page_config(
-            page_title="MentorDesk",
+            page_title="Academic MentorDesk",
             layout="wide",
             initial_sidebar_state="expanded",
             page_icon="🎓"
         )
         
-        # Initialize session state
+        
         if 'current_page' not in st.session_state:
             st.session_state.current_page = "dashboard"
         
-        # Modern Light Theme CSS
+        
         st.markdown("""
         <style>
         /* Main background - Light Theme */
@@ -777,37 +777,22 @@ class ModernStudentManagementUI:
         </style>
         """, unsafe_allow_html=True)
         
-        st.markdown('<h1 class="main-header fade-in">🎓 MentorDesk - Student Management System</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="main-header fade-in"> Academic MentorDesk - Student Management System</h1>', unsafe_allow_html=True)
     
     def show_sidebar_menu(self):
-        # Custom sidebar toggle button
-        st.markdown("""
-        
-        <script>
-        function toggleSidebar() {
-            const sidebar = document.querySelector('[data-testid="stSidebar"]');
-            if (sidebar.style.transform === 'translateX(-100%)') {
-                sidebar.style.transform = 'translateX(0)';
-            } else {
-                sidebar.style.transform = 'translateX(-100%)';
-            }
-        }
-        </script>
-        """, unsafe_allow_html=True)
-        
-        st.sidebar.markdown('<div class="sidebar-title">🎓 MentorDesk</div>', unsafe_allow_html=True)
+        st.sidebar.markdown('<div class="sidebar-title"> Academic MentorDesk</div>', unsafe_allow_html=True)
         st.sidebar.markdown("---")
         
         # Navigation buttons with meaningful names
         st.sidebar.markdown('<div class="nav-container">', unsafe_allow_html=True)
         
         pages = [
-            ("📊 Academic Dashboard", "dashboard"),
-            ("👤 Student Enrollment", "registration"),
-            ("📚 Student Directory", "directory"),
-            ("📈 Performance Analytics", "analytics"),
-            ("⚙️ Student Management", "management"),
-            ("💾 Data Operations", "data")
+            (" Academic Dashboard", "dashboard"),
+            (" Student Enrollment", "registration"),
+            (" Student Directory", "directory"),
+            (" Academic MentorDesk Analytics", "analytics"),
+            (" Student Management", "management"),
+            (" Data Operations", "data")
         ]
         
         for page_name, page_key in pages:
@@ -826,7 +811,7 @@ class ModernStudentManagementUI:
         
         # System overview in sidebar
         st.sidebar.markdown("---")
-        st.sidebar.markdown("### 📈 Quick Stats")
+        st.sidebar.markdown("###  Quick Stats")
         
         stats = self.manager.get_statistics()
         
@@ -840,7 +825,7 @@ class ModernStudentManagementUI:
             
             st.sidebar.markdown(f"""
             <div style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0;">
-                <span style="color: #64748B;">Avg Performance</span>
+                <span style="color: #64748B;">Avg Academic MentorDesk</span>
                 <span style="font-weight: 700; color: #10B981;">{stats.get('average_performance', 0)}%</span>
             </div>
             """, unsafe_allow_html=True)
@@ -855,13 +840,13 @@ class ModernStudentManagementUI:
         st.sidebar.markdown("---")
         st.sidebar.markdown("""
         <div style="text-align: center; color: #64748B; font-size: 0.8rem;">
-            <strong>MentorDesk v4.0</strong><br>
+            <strong>Academic MentorDesk v4.0</strong><br>
             Academic Management System
         </div>
         """, unsafe_allow_html=True)
 
     def show_dashboard(self):
-        st.markdown('<h2 class="section-header">📊 Academic Dashboard</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Academic MentorDesk Dashboard</h2>', unsafe_allow_html=True)
         
         stats = self.manager.get_statistics()
         performance_analysis = self.manager.get_performance_analysis()
@@ -874,74 +859,74 @@ class ModernStudentManagementUI:
             """, unsafe_allow_html=True)
             return
         
-        # Enhanced Metric Cards Row with proper spacing
+        
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown(f"""
             <div class="metric-card metric-card-1" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">TOTAL STUDENTS</div>
-                <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B;">{stats['total_students']}</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Active Learners</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">TOTAL STUDENTS</div>
+                <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1e293b;">{stats['total_students']}</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">Active Learners</div>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown(f"""
             <div class="metric-card metric-card-2" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">AVG PERFORMANCE</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">AVG ACADEMIC MENTORDESK</div>
                 <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B;">{stats['average_performance']}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">{stats['performance_trend']} Trend</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">{stats['performance_trend']} Trend</div>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
             st.markdown(f"""
             <div class="metric-card metric-card-3" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">PASS RATE</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">PASS RATE</div>
                 <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B;">{performance_analysis.get('pass_rate', 0):.1f}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Overall Success</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">Overall Success</div>
             </div>
             """, unsafe_allow_html=True)
         
-        # Second Row of Metrics
+        
         col4, col5, col6 = st.columns(3)
         
         with col4:
             st.markdown(f"""
             <div class="metric-card metric-card-4" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">EXCELLENCE RATE</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">EXCELLENCE RATE</div>
                 <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B;">{performance_analysis.get('excellence_rate', 0):.1f}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">90%+ Performers</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">90%+ Performers</div>
             </div>
             """, unsafe_allow_html=True)
         
         with col5:
             st.markdown(f"""
             <div class="metric-card metric-card-5" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">AVG ATTENDANCE</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">AVG ATTENDANCE</div>
                 <div style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B;">{stats['average_attendance']}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Class Participation</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">Class Participation</div>
             </div>
             """, unsafe_allow_html=True)
         
         with col6:
             st.markdown(f"""
             <div class="metric-card metric-card-6" style="margin: 1rem 0;">
-                <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.5rem;">TOP PERFORMER</div>
+                <div style="font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">TOP PERFORMER</div>
                 <div style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; color: #1E293B; line-height: 1.2;">{stats['top_performer']}</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Leading Student</div>
+                <div style="font-size: 0.8rem; color: #1e293b;">Leading Student</div>
             </div>
             """, unsafe_allow_html=True)
         
-        # Performance Analytics Section
+        
         st.markdown("---")
-        st.markdown('<h3 class="section-header">📈 Performance Analytics</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="section-header"> Academic MentorDesk Analytics</h3>', unsafe_allow_html=True)
         
         col1, col2 = st.columns(2)
         
         with col1:
-            # Performance Distribution Pie Chart
+            
             if any(stats['status_distribution'].values()):
                 status_data = stats['status_distribution']
                 colors = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444']
@@ -949,7 +934,7 @@ class ModernStudentManagementUI:
                 fig_status = px.pie(
                     values=list(status_data.values()),
                     names=list(status_data.keys()),
-                    title="Student Performance Distribution",
+                    title="Student Academic MentorDesk Distribution",
                     color_discrete_sequence=colors
                 )
                 fig_status.update_traces(
@@ -961,14 +946,14 @@ class ModernStudentManagementUI:
                 fig_status.update_layout(
                     showlegend=True,
                     height=400,
-                    plot_bgcolor='white',
-                    paper_bgcolor='white',
-                    font=dict(size=12, color='#1E293B')
+                    plot_bgcolor='blue',
+                    paper_bgcolor='blue',
+                    font=dict(size=12, color="#1E293B")
                 )
                 st.plotly_chart(fig_status, use_container_width=True)
         
         with col2:
-            # Grade Distribution Bar Chart
+
             if any(stats['grade_distribution'].values()):
                 grade_data = stats['grade_distribution']
                 colors = ['#10B981', '#3B82F6', '#F59E0B', '#F97316', '#EF4444']
@@ -986,9 +971,9 @@ class ModernStudentManagementUI:
                     yaxis_title="Number of Students",
                     showlegend=False,
                     height=400,
-                    plot_bgcolor='white',
-                    paper_bgcolor='white',
-                    font=dict(size=12, color='#1E293B')
+                    plot_bgcolor='blue',
+                    paper_bgcolor='blue',
+                    font=dict(size=12, color="#1E293B")
                 )
                 fig_grade.update_traces(
                     marker_line_color='white',
@@ -999,7 +984,7 @@ class ModernStudentManagementUI:
                 st.plotly_chart(fig_grade, use_container_width=True)
 
     def show_registration(self):
-        st.markdown('<h2 class="section-header">👤 Student Enrollment</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Student Enrollment</h2>', unsafe_allow_html=True)
         
         with st.form("student_registration_form", clear_on_submit=True):
             with st.container():
@@ -1008,14 +993,14 @@ class ModernStudentManagementUI:
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.markdown("### 👤 Personal Information")
+                    st.markdown("###  Personal Information")
                     name = st.text_input("Full Name *", placeholder="Enter student's full name", key="reg_name")
                     age = st.number_input("Age *", min_value=15, max_value=70, value=18, key="reg_age")
                     email = st.text_input("Email Address *", placeholder="student@institution.edu", key="reg_email")
                     phone = st.text_input("Phone Number", placeholder="+91 9876543210", key="reg_phone")
                 
                 with col2:
-                    st.markdown("### 🎓 Academic Information")
+                    st.markdown("###  Academic Information")
                     course = st.text_input("Course/Program *", placeholder="Computer Science", key="reg_course")
                     department = st.selectbox("Department *", [
                         "Computer Science", "Engineering", "Mathematics", "Physics", 
@@ -1024,7 +1009,7 @@ class ModernStudentManagementUI:
                     ], key="reg_department")
                     grade_options = [grade.value for grade in Grade]
                     grade = st.selectbox("Current Grade *", grade_options, key="reg_grade")
-                    performance = st.slider("Academic Performance (%) *", 0, 100, 75, key="reg_performance")
+                    performance = st.slider("Academic MentorDesk Score (%) *", 0, 100, 75, key="reg_performance")
                     attendance = st.slider("Attendance Rate (%)", 0, 100, 95, key="reg_attendance")
                     enrollment_date = st.date_input("Enrollment Date", value=datetime.now(), key="reg_date")
                 
@@ -1074,34 +1059,34 @@ class ModernStudentManagementUI:
                         
                         success, message = self.manager.add_student(new_student)
                         if success:
-                            st.markdown(f'<div class="success-message">✅ Student registered successfully! Student ID: {student_id}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="success-message"> Student registered successfully! Student ID: {student_id}</div>', unsafe_allow_html=True)
                             st.balloons()
                             time.sleep(2)
                             st.session_state.current_page = "directory"
                             st.rerun()
                         else:
-                            st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
 
     def show_directory(self):
-        st.markdown('<h2 class="section-header">📚 Student Directory</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Student Directory</h2>', unsafe_allow_html=True)
         
-        # Enhanced Search and Filters
+
         col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
         
         with col1:
-            search_query = st.text_input("🔍 Search Students", placeholder="Search by name, email, course, department...")
+            search_query = st.text_input(" Search Students", placeholder="Search by name, email, course, department...")
         
         with col2:
-            status_filter = st.selectbox("📊 Status", ["All"] + [status.value for status in PerformanceStatus])
+            status_filter = st.selectbox(" Status", ["All"] + [status.value for status in PerformanceStatus])
         
         with col3:
             grade_filter = st.selectbox("🎓 Grade", ["All"] + [grade.value for grade in Grade])
         
         with col4:
             departments = ["All"] + sorted(list(set(s.department for s in self.manager.students)))
-            department_filter = st.selectbox("🏫 Department", departments)
+            department_filter = st.selectbox(" Department", departments)
         
-        # Get filtered students
+       
         students = self.manager.get_all_students()
         
         if search_query:
@@ -1127,7 +1112,7 @@ class ModernStudentManagementUI:
             """, unsafe_allow_html=True)
             return
         
-        # Create enhanced dataframe
+
         data = []
         for student in students:
             status = student.calculate_status()
@@ -1139,7 +1124,7 @@ class ModernStudentManagementUI:
                 'Age': student.age,
                 'Grade': student.grade,
                 'Email': student.email,
-                'Performance': f"{student.performance}%",
+                'Academic MentorDesk': f"{student.performance}%",
                 'Attendance': f"{student.attendance}%",
                 'Status': status,
                 'Attendance Status': attendance_status,
@@ -1153,7 +1138,7 @@ class ModernStudentManagementUI:
         
         st.subheader(f"{title} ({len(students)} records)")
         
-        # Display with enhanced styling
+        
         for _, student in df.iterrows():
             with st.container():
                 st.markdown('<div class="modern-card">', unsafe_allow_html=True)
@@ -1162,18 +1147,18 @@ class ModernStudentManagementUI:
                 
                 with col1:
                     st.markdown(f"**{student['Name']}** ({student['Student ID']})")
-                    st.markdown(f"📧 {student['Email']}")
-                    st.markdown(f"📞 {student['Phone'] if student['Phone'] else 'N/A'}")
-                    st.markdown(f"🏫 {student['Course']} - {student['Department']}")
+                    st.markdown(f" {student['Email']}")
+                    st.markdown(f" {student['Phone'] if student['Phone'] else 'N/A'}")
+                    st.markdown(f" {student['Course']} - {student['Department']}")
                 
                 with col2:
-                    st.markdown(f"📅 Enrolled: {student['Enrollment Date']}")
+                    st.markdown(f" Enrolled: {student['Enrollment Date']}")
                     
-                    # Progress bars
-                    performance_pct = float(student['Performance'].replace('%', ''))
+                    
+                    performance_pct = float(student['Academic MentorDesk'].replace('%', ''))
                     attendance_pct = float(student['Attendance'].replace('%', ''))
                     
-                    st.markdown("**Performance:**")
+                    st.markdown("**Academic MentorDesk:**")
                     st.progress(performance_pct / 100)
                     
                     st.markdown("**Attendance:**")
@@ -1183,14 +1168,14 @@ class ModernStudentManagementUI:
                     status_class = student['Status'].lower().replace(' ', '-').replace('⭐-', '').replace('👍-', '').replace('📊-', '').replace('🚨-', '')
                     st.markdown(f'<div class="status-badge status-{status_class}">{student["Status"]}</div>', unsafe_allow_html=True)
                     st.markdown(f"**Grade: {student['Grade']}**")
-                    st.markdown(f"**Performance: {student['Performance']}**")
+                    st.markdown(f"**Academic MentorDesk: {student['Academic MentorDesk']}**")
                     st.markdown(f"**Attendance: {student['Attendance']}**")
                 
                 st.markdown('</div>', unsafe_allow_html=True)
         
-        # Summary statistics
+        
         st.markdown("---")
-        st.markdown('<h4>📊 Summary Statistics</h4>', unsafe_allow_html=True)
+        st.markdown('<h4> Summary Statistics</h4>', unsafe_allow_html=True)
         
         if students:
             col1, col2, col3, col4 = st.columns(4)
@@ -1199,7 +1184,7 @@ class ModernStudentManagementUI:
                 st.metric("Average Age", f"{avg_age:.1f} years")
             with col2:
                 avg_perf = sum(s.performance for s in students) / len(students)
-                st.metric("Average Performance", f"{avg_perf:.1f}%")
+                st.metric("Average Academic MentorDesk", f"{avg_perf:.1f}%")
             with col3:
                 avg_att = sum(s.attendance for s in students) / len(students)
                 st.metric("Average Attendance", f"{avg_att:.1f}%")
@@ -1208,7 +1193,7 @@ class ModernStudentManagementUI:
                 st.metric("Excellent Students", excellent_count)
 
     def show_analytics(self):
-        st.markdown('<h2 class="section-header">📈 Performance Analytics</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Academic MentorDesk Analytics</h2>', unsafe_allow_html=True)
         
         stats = self.manager.get_statistics()
         performance_analysis = self.manager.get_performance_analysis()
@@ -1221,32 +1206,32 @@ class ModernStudentManagementUI:
             """, unsafe_allow_html=True)
             return
         
-        # Correlation Analysis
-        st.markdown("### 📊 Performance Insights")
+        
+        st.markdown("###  Academic MentorDesk Insights")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
             correlation = performance_analysis.get('correlation', 0)
             trend_label = "Strong positive" if correlation > 0.5 else "Weak correlation" if correlation > 0.2 else "No correlation"
-            st.metric("Performance vs Attendance Correlation", 
+            st.metric("Academic MentorDesk vs Attendance Correlation", 
                      f"{correlation:.2f}",
                      trend_label)
         
         with col2:
-            st.metric("Median Performance", f"{performance_analysis.get('median_performance', 0):.1f}%")
+            st.metric("Median Academic MentorDesk", f"{performance_analysis.get('median_performance', 0):.1f}%")
         
         with col3:
-            st.metric("Performance Range", 
+            st.metric("Academic MentorDesk Range", 
                      f"{performance_analysis.get('min_performance', 0):.0f}-{performance_analysis.get('max_performance', 0):.0f}%")
         
-        # Detailed Distribution Analysis
-        st.markdown("### 📈 Detailed Distributions")
+        
+        st.markdown("###  Detailed Distributions")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            # Attendance Distribution
+            
             if any(stats['attendance_distribution'].values()):
                 attendance_data = stats['attendance_distribution']
                 fig_attendance = px.bar(
@@ -1261,9 +1246,9 @@ class ModernStudentManagementUI:
                     yaxis_title="Number of Students",
                     showlegend=False,
                     height=400,
-                    plot_bgcolor='white',
-                    paper_bgcolor='white',
-                    font=dict(color='#1E293B')
+                    plot_bgcolor='blue',
+                    paper_bgcolor='blue',
+                    font=dict(color="#E2EAF7")
                 )
                 fig_attendance.update_traces(
                     marker_line_color='white',
@@ -1273,7 +1258,7 @@ class ModernStudentManagementUI:
                 st.plotly_chart(fig_attendance, use_container_width=True)
         
         with col2:
-            # Department Distribution
+            
             if stats['department_distribution']:
                 dept_data = stats['department_distribution']
                 fig_dept = px.pie(
@@ -1284,9 +1269,9 @@ class ModernStudentManagementUI:
                 )
                 fig_dept.update_layout(
                     height=400,
-                    plot_bgcolor='white',
-                    paper_bgcolor='white',
-                    font=dict(color='#1E293B')
+                    plot_bgcolor='blue',
+                    paper_bgcolor='blue',
+                    font=dict(color="#DCE1E9")
                 )
                 fig_dept.update_traces(
                     textposition='inside',
@@ -1295,9 +1280,9 @@ class ModernStudentManagementUI:
                 st.plotly_chart(fig_dept, use_container_width=True)
 
     def show_management(self):
-        st.markdown('<h2 class="section-header">⚙️ Student Management</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Student Management</h2>', unsafe_allow_html=True)
         
-        tab1, tab2, tab3 = st.tabs(["✏️ Update Records", "🗑️ Delete Records", "📦 Bulk Operations"])
+        tab1, tab2, tab3 = st.tabs([" Update Records", " Delete Records", " Bulk Operations"])
         
         with tab1:
             self._show_update_student_tab()
@@ -1335,26 +1320,37 @@ class ModernStudentManagementUI:
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.markdown("### 👤 Personal Information")
-                    new_name = st.text_input("Full Name", value=student.name)
-                    new_age = st.number_input("Age", min_value=15, max_value=70, value=student.age)
-                    new_email = st.text_input("Email", value=student.email)
-                    new_phone = st.text_input("Phone", value=student.phone)
+                    st.markdown("###  Personal Information")
+                    new_name = st.text_input("Full Name *", value=student.name)
+                    new_age = st.number_input("Age *", min_value=15, max_value=70, value=student.age)
+                    new_email = st.text_input("Email Address *", value=student.email)
+                    new_phone = st.text_input("Phone Number", value=student.phone)
                 
                 with col2:
-                    st.markdown("### 🎓 Academic Information")
-                    new_course = st.text_input("Course", value=student.course)
-                    new_department = st.text_input("Department", value=student.department)
-                    new_grade = st.selectbox("Grade", [g.value for g in Grade], 
-                                           index=[g.value for g in Grade].index(student.grade))
-                    new_performance = st.slider("Performance", 0, 100, value=int(student.performance))
-                    new_attendance = st.slider("Attendance", 0, 100, value=int(student.attendance))
+                    st.markdown("###  Academic Information")
+                    new_course = st.text_input("Course/Program *", value=student.course)
+                    
+                    departments = [
+                        "Computer Science", "Engineering", "Mathematics", "Physics", 
+                        "Chemistry", "Biology", "Business", "Arts", "Social Sciences",
+                        "Life Sciences", "Data Science", "Artificial Intelligence"
+                    ]
+                    current_dept_index = departments.index(student.department) if student.department in departments else 0
+                    new_department = st.selectbox("Department *", departments, index=current_dept_index)
+                    
+                    grade_options = [grade.value for grade in Grade]
+                    current_grade_index = grade_options.index(student.grade) if student.grade in grade_options else 0
+                    new_grade = st.selectbox("Current Grade *", grade_options, index=current_grade_index)
+                    
+                    new_performance = st.slider("Academic MentorDesk Score (%) *", 0, 100, value=int(student.performance))
+                    new_attendance = st.slider("Attendance Rate (%)", 0, 100, value=int(student.attendance))
                 
                 st.markdown('</div>', unsafe_allow_html=True)
                 
+                st.markdown("***Required fields**")
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
-                    update_clicked = st.form_submit_button("💾 Update Student", use_container_width=True)
+                    update_clicked = st.form_submit_button(" Update Student", use_container_width=True)
                 
                 if update_clicked:
                     update_data = {
@@ -1376,13 +1372,13 @@ class ModernStudentManagementUI:
                     else:
                         success, message = self.manager.update_student(student_id, **update_data)
                         if success:
-                            st.markdown(f'<div class="success-message">✅ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
                             st.rerun()
                         else:
-                            st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
 
     def _show_delete_student_tab(self):
-        st.subheader("🗑️ Delete Student Record")
+        st.subheader(" Delete Student Record")
         
         if not self.manager.students:
             st.markdown("""
@@ -1410,7 +1406,7 @@ class ModernStudentManagementUI:
                     <div><strong>Email:</strong> {student.email}</div>
                     <div><strong>Course:</strong> {student.course}</div>
                     <div><strong>Department:</strong> {student.department}</div>
-                    <div><strong>Performance:</strong> {student.performance}%</div>
+                    <div><strong>Academic MentorDesk:</strong> {student.performance}%</div>
                     <div><strong>Attendance:</strong> {student.attendance}%</div>
                     <div><strong>Status:</strong> {student.calculate_status()}</div>
                     <div><strong>Enrollment:</strong> {student.enrollment_date}</div>
@@ -1418,20 +1414,20 @@ class ModernStudentManagementUI:
             </div>
             """, unsafe_allow_html=True)
             
-            st.warning("⚠️ This action cannot be undone. The student record will be permanently deleted.")
+            st.warning(" This action cannot be undone. The student record will be permanently deleted.")
             
             col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
-                if st.button("🗑️ Delete Student", use_container_width=True, type="primary"):
+                if st.button(" Delete Student", use_container_width=True, type="primary"):
                     success, message = self.manager.delete_student(student_id)
                     if success:
-                        st.markdown(f'<div class="success-message">✅ {message}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
                         st.rerun()
                     else:
-                        st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                        st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
 
     def _show_bulk_operations_tab(self):
-        st.subheader("📦 Bulk Operations")
+        st.subheader(" Bulk Operations")
         
         st.markdown("""
         <div class="info-message">
@@ -1447,7 +1443,7 @@ class ModernStudentManagementUI:
             """, unsafe_allow_html=True)
             return
         
-        # Multi-select for students
+        
         student_options = {f"{s.student_id} - {s.name}": s.student_id for s in self.manager.students}
         selected_students = st.multiselect(
             "Select Students for Bulk Operation",
@@ -1460,8 +1456,8 @@ class ModernStudentManagementUI:
             
             st.markdown(f"**Selected {len(selected_ids)} students for operation**")
             
-            # Show selected students
-            with st.expander("📋 View Selected Students"):
+            
+            with st.expander(" View Selected Students"):
                 for student_id in selected_ids:
                     student = self.manager.get_student(student_id)
                     if student:
@@ -1470,41 +1466,41 @@ class ModernStudentManagementUI:
             col1, col2 = st.columns(2)
             
             with col1:
-                if st.button("🗑️ Delete Selected Students", use_container_width=True):
+                if st.button(" Delete Selected Students", use_container_width=True):
                     st.warning(f"Are you sure you want to delete {len(selected_ids)} students?")
                     confirm = st.checkbox("I confirm this bulk deletion")
                     
                     if confirm:
                         success, message = self.manager.bulk_delete_students(selected_ids)
                         if success:
-                            st.markdown(f'<div class="success-message">✅ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
                             st.rerun()
                         else:
-                            st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
 
     def show_data_operations(self):
-        st.markdown('<h2 class="section-header">💾 Data Operations</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-header"> Data Operations</h2>', unsafe_allow_html=True)
         
-        tab1, tab2, tab3 = st.tabs(["📤 Export Data", "📥 Import Data", "🛠️ System Tools"])
+        tab1, tab2, tab3 = st.tabs([" Export Data", " Import Data", " System Tools"])
         
         with tab1:
-            st.subheader("📤 Export Student Data")
+            st.subheader(" Export Student Data")
             st.markdown("""
             <div class="modern-card">
                 Export all student records to CSV format for external analysis, reporting, or backup purposes.
-                The exported file will include all student information including performance metrics and attendance data.
+                The exported file will include all student information including academic mentordesk metrics and attendance data.
             </div>
             """, unsafe_allow_html=True)
             
             col1, col2 = st.columns([1, 1])
             
             with col1:
-                if st.button("📤 Export to CSV", use_container_width=True):
+                if st.button(" Export to CSV", use_container_width=True):
                     with st.spinner("Generating export file..."):
                         success, message, csv_data = self.manager.export_to_csv()
                         
                         if success:
-                            st.markdown(f'<div class="success-message">✅ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
                             
                             # Create download link
                             b64 = base64.b64encode(csv_data.encode()).decode()
@@ -1512,50 +1508,50 @@ class ModernStudentManagementUI:
                             st.markdown(href, unsafe_allow_html=True)
                             
                             # Show preview
-                            st.subheader("📊 Data Preview")
+                            st.subheader(" Data Preview")
                             df = pd.read_csv(io.StringIO(csv_data))
                             st.dataframe(df.head(10), use_container_width=True)
                         else:
-                            st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
             
             with col2:
                 st.metric("Total Records", len(self.manager.students))
                 st.metric("Data Size", f"{(len(str(self.manager.students)) / 1024):.1f} KB")
         
         with tab2:
-            st.subheader("📥 Import Student Data")
+            st.subheader(" Import Student Data")
             st.markdown("""
             <div class="modern-card">
                 Import student records from CSV file. Ensure your CSV file follows the required format with columns:
-                name, age, grade, email, performance, phone, course, department, attendance
+                name, age, grade, email, academic_mentordesk, phone, course, department, attendance
             </div>
             """, unsafe_allow_html=True)
             
             uploaded_file = st.file_uploader("Choose CSV file", type=['csv'], key="import_uploader")
             
             if uploaded_file is not None:
-                # Show preview
+              
                 df_preview = pd.read_csv(uploaded_file)
-                st.subheader("📋 Uploaded File Preview")
+                st.subheader(" Uploaded File Preview")
                 st.dataframe(df_preview.head(5), use_container_width=True)
                 
-                if st.button("📥 Import Data", use_container_width=True):
+                if st.button(" Import Data", use_container_width=True):
                     with st.spinner("Importing student data..."):
-                        # Read file content
+                        
                         file_content = uploaded_file.getvalue().decode('utf-8')
                         success, message, errors = self.manager.import_from_csv(file_content)
                         
                         if success:
-                            st.markdown(f'<div class="success-message">✅ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
                             if errors:
-                                st.markdown("### ⚠️ Import Warnings")
-                                for error in errors[:10]:  # Show first 10 errors
+                                st.markdown("###  Import Warnings")
+                                for error in errors[:10]:  
                                     st.markdown(f'<div class="warning-message">{error}</div>', unsafe_allow_html=True)
                         else:
-                            st.markdown(f'<div class="error-message">❌ {message}</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
         
         with tab3:
-            st.subheader("🛠️ System Tools")
+            st.subheader(" System Tools")
             st.markdown("""
             <div class="modern-card">
                 Advanced system utilities for data management and maintenance.
@@ -1565,23 +1561,23 @@ class ModernStudentManagementUI:
             col1, col2 = st.columns(2)
             
             with col1:
-                if st.button("🔄 Clear Cache", use_container_width=True):
+                if st.button(" Clear Cache", use_container_width=True):
                     self.manager.clear_cache()
-                    st.markdown('<div class="success-message">✅ Cache cleared successfully</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="success-message"> Cache cleared successfully</div>', unsafe_allow_html=True)
                 
-                if st.button("📊 Refresh Statistics", use_container_width=True):
+                if st.button(" Refresh Statistics", use_container_width=True):
                     self.manager.clear_cache()
-                    st.markdown('<div class="success-message">✅ Statistics refreshed</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="success-message"> Statistics refreshed</div>', unsafe_allow_html=True)
                     st.rerun()
             
             with col2:
-                if st.button("🔍 Data Integrity Check", use_container_width=True):
-                    # Simple data integrity check
+                if st.button(" Data Integrity Check", use_container_width=True):
+                    
                     valid_students = all(s.performance >= 0 and s.performance <= 100 for s in self.manager.students)
                     if valid_students:
-                        st.markdown('<div class="success-message">✅ All data integrity checks passed</div>', unsafe_allow_html=True)
+                        st.markdown('<div class="success-message"> All data integrity checks passed</div>', unsafe_allow_html=True)
                     else:
-                        st.markdown('<div class="error-message">❌ Data integrity issues found</div>', unsafe_allow_html=True)
+                        st.markdown('<div class="error-message"> Data integrity issues found</div>', unsafe_allow_html=True)
 
     def run(self):
         self.show_sidebar_menu()
@@ -1599,7 +1595,7 @@ class ModernStudentManagementUI:
         elif st.session_state.current_page == "data":
             self.show_data_operations()
 
-# Run the application
+
 if __name__ == "__main__":
     app = ModernStudentManagementUI()
     app.run()
