@@ -384,7 +384,14 @@ class AdvancedStudentManager:
 
 class ModernStudentManagementUI:
     def __init__(self):
-        self.manager = AdvancedStudentManager()
+        # Initialize manager in session state if not exists
+        if 'student_manager' not in st.session_state:
+            st.session_state.student_manager = AdvancedStudentManager()
+        
+        if 'current_page' not in st.session_state:
+            st.session_state.current_page = "dashboard"
+        
+        self.manager = st.session_state.student_manager
         self.setup_page()
     
     def setup_page(self):
@@ -394,11 +401,6 @@ class ModernStudentManagementUI:
             initial_sidebar_state="expanded",
             page_icon="🎓"
         )
-        
-        
-        if 'current_page' not in st.session_state:
-            st.session_state.current_page = "dashboard"
-        
         
         st.markdown("""
         <style>
@@ -986,7 +988,10 @@ class ModernStudentManagementUI:
     def show_registration(self):
         st.markdown('<h2 class="section-header"> Student Enrollment</h2>', unsafe_allow_html=True)
         
-        with st.form("student_registration_form", clear_on_submit=True):
+        # Use unique form key to avoid conflicts
+        form_key = f"student_registration_form_{int(time.time())}"
+        
+        with st.form(form_key, clear_on_submit=True):
             with st.container():
                 st.markdown('<div class="modern-card">', unsafe_allow_html=True)
                 
@@ -1061,6 +1066,8 @@ class ModernStudentManagementUI:
                         if success:
                             st.markdown(f'<div class="success-message"> Student registered successfully! Student ID: {student_id}</div>', unsafe_allow_html=True)
                             st.balloons()
+                            # Update session state
+                            st.session_state.student_manager = self.manager
                             time.sleep(2)
                             st.session_state.current_page = "directory"
                             st.rerun()
@@ -1373,6 +1380,8 @@ class ModernStudentManagementUI:
                         success, message = self.manager.update_student(student_id, **update_data)
                         if success:
                             st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
+                            # Update session state
+                            st.session_state.student_manager = self.manager
                             st.rerun()
                         else:
                             st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
@@ -1422,6 +1431,8 @@ class ModernStudentManagementUI:
                     success, message = self.manager.delete_student(student_id)
                     if success:
                         st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
+                        # Update session state
+                        st.session_state.student_manager = self.manager
                         st.rerun()
                     else:
                         st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
@@ -1474,6 +1485,8 @@ class ModernStudentManagementUI:
                         success, message = self.manager.bulk_delete_students(selected_ids)
                         if success:
                             st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
+                            # Update session state
+                            st.session_state.student_manager = self.manager
                             st.rerun()
                         else:
                             st.markdown(f'<div class="error-message"> {message}</div>', unsafe_allow_html=True)
@@ -1543,6 +1556,8 @@ class ModernStudentManagementUI:
                         
                         if success:
                             st.markdown(f'<div class="success-message"> {message}</div>', unsafe_allow_html=True)
+                            # Update session state
+                            st.session_state.student_manager = self.manager
                             if errors:
                                 st.markdown("###  Import Warnings")
                                 for error in errors[:10]:  
